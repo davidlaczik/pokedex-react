@@ -1,9 +1,9 @@
 .header {
-	@apply bg-slate-200 p-4 shadow-sm shadow-slate-400;
+	@apply bg-slate-200 shadow-sm shadow-slate-400;
 }
 
 .header__container {
-	@apply container mx-auto flex items-center justify-between;
+	@apply container mx-auto flex items-center justify-between p-4;
 }
 
 .header__title {

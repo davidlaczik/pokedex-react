@@ -1,19 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { Header } from 'layouts';
 import { PokedexList } from 'components';
 
-import styles from './Main.module.css';
 import IPokemon from 'types/IPokemon';
+import IPokedexResponse from 'types/IPokedexResponse';
+
+import styles from './Main.module.css';
 
 const Main = () => {
+	const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
+	const [pokemon, setPokemon] = useState<IPokedexResponse | null>(null);
 	const [pokeData, setPokeData] = useState<IPokemon[]>([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	// useEffect - Fetch Pokemon List
+	useEffect(() => {
+		const fetchPokemon = async () => {
+			setIsLoading(true);
+
+			const response = await axios.get(url);
+
+			setPokemon(response.data);
+		};
+
+		fetchPokemon();
+	}, [url]);
+
+	// useEffect - Fetch Pokemon Data
+	useEffect(() => {
+		const fetchData = async () => {
+			if (pokemon === null) {
+				return;
+			}
+
+			await pokemon.results.map(async (item) => {
+				const response = await axios.get(item.url);
+
+				setPokeData((prev) => [...prev, response.data]);
+			});
+
+			setIsLoading(false);
+		};
+
+		fetchData();
+	}, [pokemon]);
 
 	return (
 		<React.Fragment>
 			<Header title='Pokédex' />
 			<main className={styles.main}>
-				<PokedexList data={pokeData} />
+				{isLoading ? <h1>Loading</h1> : <PokedexList data={pokeData} />}
 			</main>
 		</React.Fragment>
 	);

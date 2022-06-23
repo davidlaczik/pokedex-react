@@ -1,0 +1,27 @@
+.item {
+	@apply flex items-center justify-between rounded-md border-2 px-4 py-2 shadow-sm hover:bg-slate-200;
+}
+
+.item__information {
+	@apply flex min-h-full flex-col justify-between;
+}
+
+.item__image {
+	@apply w-32;
+}
+
+.information__id {
+	@apply text-slate-500;
+}
+
+.information__name {
+	@apply text-2xl font-bold capitalize text-black;
+}
+
+.information__type {
+	@apply flex gap-2;
+}
+
+.type__name {
+	@apply rounded-md bg-slate-200 px-3 py-1 text-xs capitalize;
+}

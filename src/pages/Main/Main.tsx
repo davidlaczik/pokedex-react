@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 

@@ -1,0 +1,7 @@
+.pagination {
+	@apply container mx-auto flex items-center justify-between gap-4 p-4;
+}
+
+.pagination__button {
+	@apply rounded-md bg-blue-400 px-4 py-2 text-white;
+}

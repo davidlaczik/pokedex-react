@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Header } from 'layouts';
+import { Header, Pagination } from 'layouts';
 import { PokedexList } from 'components';
 
 import IPokemon from 'types/IPokemon';
@@ -47,9 +47,35 @@ const Main = () => {
 		fetchData();
 	}, [pokemon]);
 
+	const nextClickHandler = () => {
+		if (pokemon?.next === null) {
+			return;
+		}
+
+		setUrl(pokemon!.next);
+
+		setPokemon(null);
+		setPokeData([]);
+	};
+
+	const previousClickHandler = () => {
+		if (pokemon?.previous === null) {
+			return;
+		}
+
+		setUrl(pokemon!.previous);
+
+		setPokemon(null);
+		setPokeData([]);
+	};
+
 	return (
 		<React.Fragment>
 			<Header title='Pokédex' />
+			<Pagination
+				previousOnClick={previousClickHandler}
+				nextOnClick={nextClickHandler}
+			/>
 			<main className={styles.main}>
 				{isLoading ? <h1>Loading</h1> : <PokedexList data={pokeData} />}
 			</main>

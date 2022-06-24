@@ -1,5 +1,5 @@
 .item {
-	@apply flex items-center justify-between rounded-md border-2 px-4 py-2 shadow-sm hover:bg-slate-200;
+	@apply flex items-center justify-between rounded-md border-2 px-4 py-2 shadow-sm hover:cursor-pointer hover:bg-slate-200;
 }
 
 .item__information {

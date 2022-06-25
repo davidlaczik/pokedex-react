@@ -3,7 +3,7 @@
 }
 
 .header__container {
-	@apply container mx-auto flex items-center justify-between p-4;
+	@apply container mx-auto flex items-center justify-between p-2 sm:p-4;
 }
 
 .header__title {

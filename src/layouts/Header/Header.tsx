@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 import styles from './Header.module.css';
 
 interface IHeaderProps {
@@ -9,11 +12,13 @@ const Header = (props: IHeaderProps) => {
 		<header className={styles.header}>
 			<div className={styles['header__container']}>
 				<span className={styles['header__title']}>{props.title}</span>
-				<input
-					className={styles['header__search']}
-					type='text'
-					placeholder='Search for Pokemon'
-				/>
+				<a
+					href='https://github.com/davidlaczik/pokedex-react'
+					target={'_blank'}
+					rel='noopener noreferrer'
+					className={styles['header__title']}>
+					<FontAwesomeIcon icon={faGithub} />
+				</a>
 			</div>
 		</header>
 	);

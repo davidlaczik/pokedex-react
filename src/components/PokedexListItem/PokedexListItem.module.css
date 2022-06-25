@@ -1,27 +1,27 @@
 .item {
-	@apply flex items-center justify-between rounded-md border-2 px-4 py-2 shadow-sm hover:cursor-pointer hover:bg-slate-200;
-}
-
-.item__information {
-	@apply flex min-h-full flex-col justify-between;
+	@apply flex flex-col overflow-hidden rounded-xl border-2 border-slate-400/40 shadow-md hover:cursor-pointer hover:bg-slate-200;
 }
 
 .item__image {
-	@apply w-32;
+	@apply mx-auto w-3/4 p-2 sm:p-4;
+}
+
+.item__information {
+	@apply flex flex-col border-t-2 border-stone-900/10 p-4;
 }
 
 .information__id {
-	@apply text-slate-500;
+	@apply text-sm text-white xl:text-base;
 }
 
 .information__name {
-	@apply text-2xl font-bold capitalize text-black;
+	@apply text-xl font-bold capitalize text-white xl:text-3xl;
 }
 
 .information__type {
-	@apply flex gap-2;
+	@apply mt-2 flex gap-2;
 }
 
 .type__name {
-	@apply rounded-md bg-slate-200 px-3 py-1 text-xs capitalize;
+	@apply rounded-md border-2 border-white px-3 py-1 text-sm capitalize text-white xl:text-base;
 }

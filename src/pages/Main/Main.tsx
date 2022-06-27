@@ -16,6 +16,7 @@ const Main = () => {
 			<Pagination
 				previousOnClick={pokemonContext.previousPage}
 				nextOnClick={pokemonContext.nextPage}
+				totalItems={pokemonContext.totalItemsCount}
 			/>
 			<main className={styles.main}>
 				{pokemonContext.loading ? (

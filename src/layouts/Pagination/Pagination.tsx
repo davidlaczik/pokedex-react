@@ -35,9 +35,9 @@ const Pagination = (props: IPaginationProps) => {
 				onClick={previousClickHandler}>
 				<FontAwesomeIcon icon={faChevronLeft} />
 			</button>
-			<p>
+			<div className={styles['pagination__page']}>
 				{currentPage} / {totalPages}
-			</p>
+			</div>
 			<button
 				className={styles['pagination__button']}
 				onClick={nextClickHandler}>

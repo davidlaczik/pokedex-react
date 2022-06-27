@@ -7,6 +7,7 @@ export type PokemonContextType = {
 	pagination: IPokedexResponse | null;
 	pokemonList: IPokemon[];
 	loading: boolean;
+	totalItemsCount: number;
 	nextPage: () => void;
 	previousPage: () => void;
 };

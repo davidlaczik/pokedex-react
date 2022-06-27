@@ -1,18 +1,23 @@
-.bar {
-	width: 100%;
-	display: flex;
+.item {
+	@apply my-2 flex w-full gap-2 text-sm font-medium uppercase text-black sm:gap-4;
 }
 
-.inner {
-	height: 100%;
-	width: 100%;
-	border-radius: 12px;
-	overflow: hidden;
-	display: flex;
+.item__name {
+	@apply basis-1/3 text-xs sm:text-base;
 }
 
-.fill {
-	background-color: white;
-	border-radius: 10px;
-	height: 100%;
+.item__bar {
+	@apply flex grow basis-28 rounded-md bg-slate-300;
+}
+
+.bar__inner {
+	@apply flex h-full w-full overflow-hidden rounded-md;
+}
+
+.inner__fill {
+	@apply h-full rounded-md;
+}
+
+.item__value {
+	@apply basis-1/12 text-xs sm:text-base;
 }

@@ -3,24 +3,25 @@ import styles from './PokemonStatListItem.module.css';
 interface IPokemonStatListItem {
 	value: number;
 	name: string;
+	fillColor: string;
 }
 
 const PokemonStatListItem = (props: IPokemonStatListItem) => {
 	const fillWidth = Math.round((props.value / 200) * 100) + '%';
 
 	return (
-		<div className='my-2 flex justify-between text-sm font-medium uppercase text-white'>
-			<div className='w-full'>{props.name}</div>
-			<div className={styles.bar}>
-				<div className={styles.inner}>
+		<div className={styles.item}>
+			<div className={styles['item__name']}>{props.name}</div>
+			<div className={styles['item__bar']}>
+				<div className={styles['bar__inner']}>
 					<div
-						className={styles.fill}
+						className={`${styles['inner__fill']} ${props.fillColor}`}
 						style={{
 							width: fillWidth,
 						}}></div>
 				</div>
 			</div>
-			<div>{props.value}</div>
+			<div className={styles['item__value']}>{props.value}</div>
 		</div>
 	);
 };

@@ -9,6 +9,7 @@ interface IPokemonStatListProps {
 		};
 		base_stat: number;
 	}[];
+	fillColor: string;
 }
 
 const PokemonStatList = (props: IPokemonStatListProps) => {
@@ -19,6 +20,7 @@ const PokemonStatList = (props: IPokemonStatListProps) => {
 					key={index}
 					name={item.stat.name}
 					value={item.base_stat}
+					fillColor={props.fillColor}
 				/>
 			))}
 		</ul>

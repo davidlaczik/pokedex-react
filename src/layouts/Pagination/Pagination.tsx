@@ -5,23 +5,42 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Pagination.module.css';
+import { useState } from 'react';
 
 interface IPaginationProps {
 	previousOnClick: () => void;
 	nextOnClick: () => void;
+	totalItems: number;
 }
 
 const Pagination = (props: IPaginationProps) => {
+	const [currentPage, setCurrentPage] = useState(1);
+
+	const nextClickHandler = () => {
+		props.nextOnClick();
+		setCurrentPage((prev) => ++prev);
+	};
+
+	const previousClickHandler = () => {
+		props.previousOnClick();
+		setCurrentPage((prev) => --prev);
+	};
+
+	const totalPages = Math.round(props.totalItems / 20);
+
 	return (
 		<nav className={styles.pagination}>
 			<button
 				className={styles['pagination__button']}
-				onClick={props.previousOnClick}>
+				onClick={previousClickHandler}>
 				<FontAwesomeIcon icon={faChevronLeft} />
 			</button>
+			<p>
+				{currentPage} / {totalPages}
+			</p>
 			<button
 				className={styles['pagination__button']}
-				onClick={props.nextOnClick}>
+				onClick={nextClickHandler}>
 				<FontAwesomeIcon icon={faChevronRight} />
 			</button>
 		</nav>

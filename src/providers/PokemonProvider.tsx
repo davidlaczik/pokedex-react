@@ -13,6 +13,7 @@ interface IPokemonProviderProps {
 const PokemonProvider = (props: IPokemonProviderProps) => {
 	const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
 	const [isLoading, setIsLoading] = useState(false);
+	const [totalItemsCount, setTotalItemsCount] = useState(0);
 	const [pagination, setPagination] = useState<IPokedexResponse | null>(null);
 	const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
 
@@ -42,6 +43,8 @@ const PokemonProvider = (props: IPokemonProviderProps) => {
 				setPokemonList((prev) => [...prev, response.data]);
 			});
 
+			setTotalItemsCount(pagination.count);
+
 			setIsLoading(false);
 		};
 
@@ -68,6 +71,7 @@ const PokemonProvider = (props: IPokemonProviderProps) => {
 		pagination: pagination,
 		pokemonList: pokemonList,
 		loading: isLoading,
+		totalItemsCount: totalItemsCount,
 		nextPage: nextPageHandler,
 		previousPage: previousPageHandler,
 	};

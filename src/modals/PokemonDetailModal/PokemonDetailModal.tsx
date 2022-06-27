@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { PokemonStatList } from 'components';
 
 import Pokemon from 'types/IPokemon';
+import { getPokemonBackgroundColor } from 'utils/pokemonUtils';
 
 import styles from './PokemonDetailModal.module.css';
 
@@ -17,26 +18,26 @@ const portalElement = document.getElementById('modal') as HTMLElement;
 const ModalOverlay = (props: IPokemonDetailModalProps) => {
 	const pokemon = props.pokemon;
 
+	const bgColor = getPokemonBackgroundColor(pokemon.types[0].type.name);
+
 	return (
 		<React.Fragment>
 			<div className={styles.modal} onClick={props.onClose}>
 				<div
 					className={styles['modal__content']}
 					onClick={props.onClose}>
-					<img
-						className={styles['content__image']}
-						src={
-							pokemon.sprites.other['official-artwork']
-								.front_default
-						}
-						alt={pokemon.name}
-					/>
+					<div className={styles['content__image']}>
+						<img
+							src={
+								pokemon.sprites.other['official-artwork']
+									.front_default
+							}
+							alt={pokemon.name}
+						/>
+					</div>
 					<div className={styles['content__information']}>
-						<div className={styles['information__id']}>
-							# {pokemon.id}
-						</div>
 						<div className={styles['information__name']}>
-							{pokemon.name}
+							# {pokemon.id} - {pokemon.name}
 						</div>
 						<div className={styles['information__type']}>
 							{pokemon.types.map((item, index) => (
@@ -47,7 +48,10 @@ const ModalOverlay = (props: IPokemonDetailModalProps) => {
 								</div>
 							))}
 						</div>
-						<PokemonStatList stats={pokemon.stats} />
+						<PokemonStatList
+							stats={pokemon.stats}
+							fillColor={bgColor}
+						/>
 					</div>
 				</div>
 			</div>

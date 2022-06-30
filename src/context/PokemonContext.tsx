@@ -1,17 +1,16 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
 
-import IPokedexResponse from 'types/IPokedexResponse';
-import IPokemon from 'types/IPokemon';
+import { PokemonContextType } from 'types/context';
 
-export type PokemonContextType = {
-	pagination: IPokedexResponse | null;
-	pokemonList: IPokemon[];
-	loading: boolean;
-	totalItemsCount: number;
-	nextPage: () => void;
-	previousPage: () => void;
+const initialState: PokemonContextType = {
+	batch: null,
+	pokemonList: [],
+	isLoading: false,
+	itemCount: 0,
+	nextPage: () => {},
+	previousPage: () => {},
 };
 
-export const PokemonContext = React.createContext<PokemonContextType | null>(
-	null,
-);
+export const PokemonContext =
+	React.createContext<PokemonContextType>(initialState);

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { Pokemon } from 'types';
 import { PokemonStatList } from 'components';
 
-import Pokemon from 'types/IPokemon';
 import { getPokemonBackgroundColor } from 'utils/pokemonUtils';
 
 import styles from './PokemonDetailModal.module.css';

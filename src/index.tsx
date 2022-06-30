@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import './index.css';
-
+import { PokemonProvider } from 'providers';
 import { Main } from 'pages';
-import PokemonProvider from 'providers/PokemonProvider';
+
+import './index.css';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement,

@@ -1,14 +1,11 @@
+import { PokemonStat } from 'types';
+
 import { PokemonStatListItem } from 'components';
 
 import styles from './PokemonStatList.module.css';
 
 interface IPokemonStatListProps {
-	stats: {
-		stat: {
-			name: string;
-		};
-		base_stat: number;
-	}[];
+	stats: PokemonStat[];
 	fillColor: string;
 }
 

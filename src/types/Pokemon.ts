@@ -1,4 +1,7 @@
-interface IPokemon {
+import PokemonStat from './PokemonStat';
+import PokemonType from './PokemonType';
+
+type Pokemon = {
 	id: number;
 	name: string;
 	height: number;
@@ -13,21 +16,8 @@ interface IPokemon {
 			};
 		};
 	};
-	stats: [
-		{
-			base_stat: number;
-			stat: {
-				name: string;
-			};
-		},
-	];
-	types: [
-		{
-			type: {
-				name: string;
-			};
-		},
-	];
-}
+	stats: PokemonStat[];
+	types: PokemonType[];
+};
 
-export default IPokemon;
+export default Pokemon;

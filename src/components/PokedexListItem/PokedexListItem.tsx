@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-import IPokemon from 'types/IPokemon';
-import { getPokemonBackgroundColor } from 'utils/pokemonUtils';
-
+import { Pokemon } from 'types';
 import { PokemonDetailModal } from 'modals';
+
+import { getPokemonBackgroundColor } from 'utils/pokemonUtils';
 
 import styles from './PokedexListItem.module.css';
 
 interface IPokedexListItemProps {
-	pokemon: IPokemon;
+	pokemon: Pokemon;
 }
 
 const PokedexListItem = (props: IPokedexListItemProps) => {

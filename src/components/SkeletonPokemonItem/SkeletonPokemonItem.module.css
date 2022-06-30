@@ -1,0 +1,27 @@
+.item {
+	@apply flex h-64 animate-pulse flex-col rounded-xl border-2 border-slate-400/40 bg-slate-200/40 shadow-md sm:h-80;
+}
+
+.item__image {
+	@apply basis-3/5;
+}
+
+.item__information {
+	@apply flex h-full basis-2/5 flex-col gap-2 border-t-2 border-stone-900/10 p-4;
+}
+
+.information__id {
+	@apply w-full basis-1/3 rounded-md bg-slate-300;
+}
+
+.information__name {
+	@apply w-full basis-1/3 rounded-md bg-slate-300;
+}
+
+.information__type {
+	@apply flex w-4/5 basis-1/3 gap-2;
+}
+
+.type__item {
+	@apply h-full basis-1/2 rounded-md bg-slate-300;
+}

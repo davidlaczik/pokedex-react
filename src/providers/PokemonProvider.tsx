@@ -1,77 +1,81 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import IPokedexResponse from 'types/IPokedexResponse';
-import IPokemon from 'types/IPokemon';
+import { Pokemon, PokemonBatch } from 'types';
+import { PokemonContextType } from 'types/context';
 
-import { PokemonContext, PokemonContextType } from 'context/PokemonContext';
+import { PokemonContext } from 'context/PokemonContext';
 
 interface IPokemonProviderProps {
 	children: React.ReactNode;
 }
 
 const PokemonProvider = (props: IPokemonProviderProps) => {
-	const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
+	const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/');
+	const [batch, setBatch] = useState<PokemonBatch | null>(null);
+	const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [totalItemsCount, setTotalItemsCount] = useState(0);
-	const [pagination, setPagination] = useState<IPokedexResponse | null>(null);
-	const [pokemonList, setPokemonList] = useState<IPokemon[]>([]);
 
-	// useEffect - Fetch Pokemon Pagination
+	// useEffect - Fetch Pokemon Batch
 	useEffect(() => {
-		const fetchPokemon = async () => {
+		const fetchBatch = async () => {
 			setIsLoading(true);
 
 			const response = await axios.get(url);
 
-			setPagination(response.data);
+			setBatch(response.data);
 		};
 
-		fetchPokemon();
+		fetchBatch();
 	}, [url]);
 
 	// useEffect - Fetch Pokemon List
 	useEffect(() => {
 		const fetchData = async () => {
-			if (pagination === null) {
+			if (batch === null) {
 				return;
 			}
 
-			await pagination.results.map(async (item) => {
-				const response = await axios.get(item.url);
+			const data: Pokemon[] = await axios.all(
+				batch.results.map(async (item) => {
+					const resp = await axios.get(item.url);
 
-				setPokemonList((prev) => [...prev, response.data]);
-			});
+					return resp.data;
+				}),
+			);
 
-			setTotalItemsCount(pagination.count);
-
+			setPokemonList(data);
 			setIsLoading(false);
 		};
 
 		fetchData();
-	}, [pagination]);
+	}, [batch]);
 
+	const clearState = (url: string) => {
+		setIsLoading(true);
+		setUrl(url);
+		setBatch(null);
+		setPokemonList([]);
+	};
+
+	// Handlers
 	const nextPageHandler = () => {
-		if (pagination?.next) {
-			setUrl(pagination.next);
-			setPagination(null);
-			setPokemonList([]);
+		if (batch?.next && !isLoading) {
+			clearState(batch.next);
 		}
 	};
 
 	const previousPageHandler = () => {
-		if (pagination?.previous) {
-			setUrl(pagination.previous);
-			setPagination(null);
-			setPokemonList([]);
+		if (batch?.previous && !isLoading) {
+			clearState(batch.previous);
 		}
 	};
 
 	const providerValues: PokemonContextType = {
-		pagination: pagination,
+		batch: batch,
 		pokemonList: pokemonList,
-		loading: isLoading,
-		totalItemsCount: totalItemsCount,
+		isLoading: isLoading,
+		itemCount: batch?.count ?? 0,
 		nextPage: nextPageHandler,
 		previousPage: previousPageHandler,
 	};

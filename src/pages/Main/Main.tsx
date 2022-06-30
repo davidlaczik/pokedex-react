@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
-import { PokemonContext, PokemonContextType } from 'context/PokemonContext';
-
+import { PokemonContextType } from 'types/context';
+import { PokemonContext } from 'context';
 import { Header, Pagination } from 'layouts';
-import { PokedexList } from 'components';
+import { PokedexList, SkeletonPokemonList } from 'components';
 
 import styles from './Main.module.css';
 
@@ -16,12 +16,11 @@ const Main = () => {
 			<Pagination
 				previousOnClick={pokemonContext.previousPage}
 				nextOnClick={pokemonContext.nextPage}
-				totalItems={pokemonContext.totalItemsCount}
+				totalItems={pokemonContext.itemCount}
 			/>
 			<main className={styles.main}>
-				{pokemonContext.loading ? (
-					<h1>Loading</h1>
-				) : (
+				{pokemonContext.isLoading && <SkeletonPokemonList />}
+				{!pokemonContext.isLoading && (
 					<PokedexList data={pokemonContext.pokemonList} />
 				)}
 			</main>

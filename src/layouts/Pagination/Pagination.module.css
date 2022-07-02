@@ -3,9 +3,9 @@
 }
 
 .pagination__page {
-	@apply font-bold text-slate-400;
+	@apply font-medium text-slate-400;
 }
 
 .pagination__button {
-	@apply rounded-md bg-slate-400/60 px-4 py-2 text-white;
+	@apply px-4 py-2 text-slate-400;
 }

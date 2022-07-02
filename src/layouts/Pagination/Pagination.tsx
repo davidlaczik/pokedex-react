@@ -16,17 +16,26 @@ interface IPaginationProps {
 const Pagination = (props: IPaginationProps) => {
 	const [currentPage, setCurrentPage] = useState(1);
 
+	const totalPages = Math.round(props.totalItems / 20);
+
 	const nextClickHandler = () => {
+		if (currentPage + 1 > totalPages) {
+			return;
+		}
+
+		setCurrentPage(currentPage + 1);
+
 		props.nextOnClick();
-		setCurrentPage((prev) => ++prev);
 	};
 
 	const previousClickHandler = () => {
-		props.previousOnClick();
-		setCurrentPage((prev) => --prev);
-	};
+		if (currentPage - 1 < 1) {
+			return;
+		}
 
-	const totalPages = Math.round(props.totalItems / 20);
+		setCurrentPage(currentPage - 1);
+		props.previousOnClick();
+	};
 
 	return (
 		<nav className={styles.pagination}>
